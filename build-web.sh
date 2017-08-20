@@ -13,14 +13,15 @@
 #mkdir target/web-server-container
 #git clone https://github.com/reflectcal/web-server-container target/web-server-container
 #сp target/reflectcal/build/static/* target/web-server-container/src/
-#docker build web-server-container
+docker build --tag reflectcal/web-server:latest target/web-server-container
 
 #mkdir target/app-server-container
 #git clone https://github.com/reflectcal/app-server-container target/app-server-container
 cp -r target/reflectcal/build/app target/app-server-container/src/
 cp -r target/reflectcal/build/logs target/app-server-container/src/
-cp -r target/reflectcal/build/app.js target/app-server-container/src/
-cp -r target/reflectcal/build/package.json target/app-server-container/src/
+cp target/reflectcal/build/app.js target/app-server-container/src/
+cp target/reflectcal/build/package.json target/app-server-container/src/
+cp client_secret_* target/app-server-container/src/
 
 docker build --tag reflectcal/app-server:latest target/app-server-container
 
