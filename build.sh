@@ -16,9 +16,7 @@ mkdir target/web-server-container
 git clone https://github.com/reflectcal/web-server-container target/web-server-container
 cp -r target/reflectcal/build/static target/web-server-container/src/
 cp ~/.ssh/id_rsa_cont.pub target/web-server-container/id_rsa_cont.pub
-#docker tag your-image-name:tag ghcr.io/USERNAME/your-repo-name:tag
-docker build --tag ghcr.io/reflectcal/web-server-container:1.0.0 target/web-server-container
-docker push ghcr.io/reflectcal/web-server-container:1.0.0
+docker buildx build --platform=linux/amd64 --tag ghcr.io/reflectcal/web-server-container:1.0.5 target/web-server-container --push --load
 
 # Building app server
 mkdir target/app-server-container
@@ -28,8 +26,7 @@ cp -r target/reflectcal/build/logs target/app-server-container/src/
 cp target/reflectcal/build/app.js target/app-server-container/src/
 cp target/reflectcal/build/package.json target/app-server-container/src/
 cp ~/.ssh/id_rsa_cont.pub target/app-server-container/id_rsa_cont.pub
-docker build --tag ghcr.io/reflectcal/app-server-container:1.0.0 target/app-server-container
-docker push ghcr.io/reflectcal/app-server-container:1.0.0
+docker buildx build --platform=linux/amd64 --tag ghcr.io/reflectcal/app-server-container:1.0.9 target/app-server-container --push --load
 
 # Building mailer daemon
 mkdir target/reflectcal-mailer
@@ -49,6 +46,5 @@ cp -r target/reflectcal-mailer/logs target/mail-daemon-container/src/
 cp target/reflectcal-mailer/package.json target/mail-daemon-container/src/
 
 cp ~/.ssh/id_rsa_cont.pub target/mail-daemon-container/id_rsa_cont.pub
-docker build --tag ghcr.io/reflectcal/mail-daemon-container:1.0.0 target/mail-daemon-container
-docker push ghcr.io/reflectcal/mail-daemon-container:1.0.0
+docker buildx build --platform=linux/amd64 --tag ghcr.io/reflectcal/mail-daemon-container:1.0.2 target/mail-daemon-container --push --load
 
