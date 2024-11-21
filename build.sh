@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# Use JDK 8
+export JAVA_HOME=$(ls -1d /Library/Java/JavaVirtualMachines/jdk1.8*/Contents/Home | sort -V | tail -n 1)
+export PATH=$JAVA_HOME/bin:$PATH
+java -version
+
 # Building web-application before containers
 # instead of rm -rf
 rm -rf target
